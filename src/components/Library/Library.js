@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import BookShelves from './BookShelves';
 import LibraryHeader from './LibraryHeader';
+import SearchButton from './SearchButton';
 
 const Library = ({books, shelves, onShelfChange}) => {
 
@@ -10,6 +11,7 @@ const Library = ({books, shelves, onShelfChange}) => {
     <div className="library">
       <LibraryHeader />
       <BookShelves books={books} shelves={shelves} onShelfChange={onShelfChange} />
+      <SearchButton />
     </div>
   );
 };
