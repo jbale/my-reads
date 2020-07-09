@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import BookShelf from './BookShelf';
+import BookShelfSelector from './BookShelfSelector';
 
-const BookShelves = ({books, shelves}) => {
+const BookShelves = ({books, shelves, onShelfChange}) => {
 
   const booksByShelf = books
     .filter(({shelf}) => shelf !== null)
@@ -14,18 +15,24 @@ const BookShelves = ({books, shelves}) => {
       ]
     }), {});
 
-    console.log(booksByShelf)
-
   return (
     <div className="bookshelves">
-      {shelves.map((shelf) => <BookShelf key={shelf.id} books={booksByShelf[shelf.id]} shelf={shelf} shelves={shelves} />)}
+      {shelves.map((shelf) => (
+        <BookShelf
+          key={shelf.id}
+          books={booksByShelf[shelf.id]}
+          shelf={shelf}
+          renderBookShelfSelector={(book) => <BookShelfSelector book={book} shelf={shelf} shelves={shelves} onSelect={onShelfChange} />}
+        />
+      ))}
     </div>
   );
 };
 
 BookShelves.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
-  shelves: PropTypes.arrayOf(PropTypes.object).isRequired
+  shelves: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onShelfChange: PropTypes.func.isRequired
 }
 
 

@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 
 import BookCover from './BookCover';
 import BookMetaData from './BookMetaData';
-import BookShelfSelector from './BookShelfSelector';
 
-const Book = ({book, shelves}) => {
+const Book = ({book, renderAction }) => {
 
   return (
     <div className="book">
       <div className="book-top">
-        <BookCover cover={book.cover}/>
-        <div className="book-shelf-changer-container">
-          <BookShelfSelector currentShelf={book.shelf} shelves={shelves} />
+        <BookCover cover={book.imageLinks.thumbnail}/>
+        <div className="book-action-container">
+          {renderAction(book)}
         </div>
       </div>
       <BookMetaData title={book.title} authors={book.authors} />
@@ -22,7 +21,7 @@ const Book = ({book, shelves}) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  shelves: PropTypes.arrayOf(PropTypes.object).isRequired
+  renderAction: PropTypes.func.isRequired
 }
 
 export default Book;

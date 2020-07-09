@@ -1,15 +1,7 @@
 import React from 'react';
-import { Library } from '../components/Library';
+import { getAll, update } from './../utils/booksApi';
 
-const books = [
-  {
-    id: 1,
-    shelf: 'currentlyReading',
-    cover: 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api',
-    title: 'To Kill a Mockingbird',
-    authors: ['Harper Lee']
-  }
-];
+import { Library } from '../components/Library';
 
 const shelves = [
   {
@@ -26,11 +18,46 @@ const shelves = [
   }
 ];
 
-
 class LibraryContainer extends React.Component {
 
+  state = {
+    books: []
+  }
+
+  handleShelfChange = (book, shelf) => {
+    const oldShelf = book.shelf;
+
+    // Optimistic update
+    this.updateBookShelf(book, shelf)
+
+    update(book, shelf)
+      .catch(() => this.updateBookShelf(book, oldShelf))
+  }
+
+  updateBookShelf(book, shelf) {
+    this.setState(({books}) => ({
+      books: books
+        .map((bookToUpdate) => bookToUpdate.id === book.id ? {...bookToUpdate, shelf: shelf} : bookToUpdate)
+    }), () => {
+      localStorage.myreads = JSON.stringify(this.state.books);
+    });
+  }
+
+  componentDidMount() {
+    const cachedBooks = localStorage.myreads;
+
+    if (cachedBooks) {
+      this.setState({ books: JSON.parse(cachedBooks) })
+    }
+
+    getAll().then((books) => {
+      localStorage.myreads = JSON.stringify(books);
+      this.setState({books});
+    })
+  }
+
   render() {
-    return <Library books={books} shelves={shelves} />
+    return <Library books={this.state.books} shelves={shelves} onShelfChange={this.handleShelfChange} />
   }
 }
 

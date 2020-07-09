@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 
 import Book from './Book';
 
-const BookGrid = ({books, shelves}) => {
-  console.log(books)
-
+const BookGrid = ({books, renderBookAction}) => {
   return (
     <ol className="books-grid">
-      {books.map((book) => (<li key={book.id}><Book book={book} shelves={shelves} /></li>))}
+      {
+        books
+          .sort((b1, b2) => new Date(b2.publishedDate) - new Date(b1.publishedDate))
+          .map((book) => (<li key={book.id}><Book book={book} renderAction={renderBookAction} /></li>))
+      }
     </ol>
   );
 };
 
 BookGrid.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
-  shelves: PropTypes.arrayOf(PropTypes.object).isRequired
+  renderBookAction: PropTypes.func.isRequired
 }
 
 export default BookGrid;
