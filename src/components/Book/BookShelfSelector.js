@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const BookShelfSelector = ({currentShelf, shelves}) => {
 
   return (
-    <div>
+    <div className="book-shelf-changer">
       <select defaultValue={currentShelf}>
         <option value="move" disabled>Move to...</option>
         {shelves.map((shelf) => (<option key={shelf.id} value={shelf.id}>{shelf.name}</option>))}
