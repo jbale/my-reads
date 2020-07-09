@@ -103,7 +103,7 @@
 
 /* BookShelfChanger */
 
-.book-shelf-changer select {
+.book-shelf-changer-container select {
   width: 100%;
   height: 100%;
   opacity: 0;
