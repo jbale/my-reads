@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import BookCover from './BookCover';
 import BookMetaData from './BookMetaData';
 
-const Book = ({book, renderAction }) => {
+const Book = ({book, action }) => {
 
   return (
     <div className="book">
       <div className="book-top">
-        <BookCover cover={book.imageLinks.thumbnail}/>
+        <BookCover cover={book.imageLinks ? book.imageLinks.thumbnail : ''}/>
         <div className="book-action-container">
-          {renderAction(book)}
+          {action}
         </div>
       </div>
       <BookMetaData title={book.title} authors={book.authors} />
@@ -21,7 +21,7 @@ const Book = ({book, renderAction }) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  renderAction: PropTypes.func.isRequired
+  action: PropTypes.object.isRequired
 }
 
 export default Book;

@@ -1,27 +1,15 @@
 import React from 'react';
 import { getAll, update } from './../utils/booksApi';
+import { shelves } from './../utils/shelves';
+import { Switch, Route } from 'react-router-dom';
 
 import { Library } from '../components/Library';
-
-const shelves = [
-  {
-    id: 'currentlyReading',
-    name: 'Currently Reading'
-  },
-  {
-    id: 'wantToRead',
-    name: 'Want to Read'
-  },
-  {
-    id: 'read',
-    name: 'Read'
-  }
-];
+import SearchContainer from './SearchContainer';
 
 class LibraryContainer extends React.Component {
 
   state = {
-    books: []
+    books: {}
   }
 
   handleShelfChange = (book, shelf) => {
@@ -35,12 +23,12 @@ class LibraryContainer extends React.Component {
   }
 
   updateBookShelf(book, shelf) {
-    this.setState(({books}) => ({
-      books: books
-        .map((bookToUpdate) => bookToUpdate.id === book.id ? {...bookToUpdate, shelf: shelf} : bookToUpdate)
-    }), () => {
-      localStorage.myreads = JSON.stringify(this.state.books);
-    });
+    this.setState(
+      ({books}) => ({ ...books, [book.id]: {...book, shelf} }),
+      () => {
+        localStorage.myreads = JSON.stringify(this.state.books);
+      }
+    );
   }
 
   componentDidMount() {
@@ -51,13 +39,31 @@ class LibraryContainer extends React.Component {
     }
 
     getAll().then((books) => {
-      localStorage.myreads = JSON.stringify(books);
-      this.setState({books});
+      this.storeBooks(books);
     })
   }
 
+  storeBooks (books) {
+    const bookById = books.reduce((acc, book) => ({
+      ...acc,
+      [book.id]: book
+    }), {});
+
+    localStorage.myreads = JSON.stringify(bookById);
+    this.setState(bookById);
+  }
+
   render() {
-    return <Library books={this.state.books} shelves={shelves} onShelfChange={this.handleShelfChange} />
+    return (
+      <Switch>
+        <Route exact path="/">
+          <Library books={Object.values(this.state.books)} shelves={shelves} onShelfChange={this.handleShelfChange} />
+        </Route>
+        <Route exact path="/search">
+          <SearchContainer libraryBooks={this.state.books} onShelfChange={this.handleShelfChange} />
+        </Route>
+      </Switch>
+    )
   }
 }
 

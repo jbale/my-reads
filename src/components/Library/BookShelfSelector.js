@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 const BookShelfSelector = ({shelves, onSelect, book}) => {
 
   const handleSelect = (event) => {
@@ -9,7 +8,7 @@ const BookShelfSelector = ({shelves, onSelect, book}) => {
   }
 
   return (
-    <select className="book-shelf-changer" defaultValue={book.shelf} onChange={handleSelect}>
+    <select className="book-shelf-changer" defaultValue={book.shelf ? book.shelf : 'none'} onChange={handleSelect}>
       <option value="move" disabled>Move to...</option>
       {shelves.map((shelf) => (<option key={shelf.id} value={shelf.id}>{shelf.name}</option>))}
       <option value="none">None</option>

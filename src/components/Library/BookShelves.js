@@ -22,7 +22,7 @@ const BookShelves = ({books, shelves, onShelfChange}) => {
           key={shelf.id}
           books={booksByShelf[shelf.id]}
           shelf={shelf}
-          renderBookShelfSelector={(book) => <BookShelfSelector book={book} shelf={shelf} shelves={shelves} onSelect={onShelfChange} />}
+          renderBookShelfSelector={(book) => <BookShelfSelector book={book} shelves={shelves} onSelect={onShelfChange} />}
         />
       ))}
     </div>

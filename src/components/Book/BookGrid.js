@@ -9,7 +9,7 @@ const BookGrid = ({books, renderBookAction}) => {
       {
         books
           .sort((b1, b2) => new Date(b2.publishedDate) - new Date(b1.publishedDate))
-          .map((book) => (<li key={book.id}><Book book={book} renderAction={renderBookAction} /></li>))
+          .map((book) => (<li key={book.id}><Book book={book} action={renderBookAction(book)} /></li>))
       }
     </ol>
   );

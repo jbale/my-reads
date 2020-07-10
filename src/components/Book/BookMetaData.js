@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BookMetaData = ({title, authors}) => {
+const BookMetaData = ({title, authors = ['Unknown']}) => {
 
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ const BookMetaData = ({title, authors}) => {
 
 BookMetaData.propTypes = {
   title: PropTypes.string.isRequired,
-  authors: PropTypes.arrayOf(PropTypes.string).isRequired
+  authors: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default BookMetaData;
