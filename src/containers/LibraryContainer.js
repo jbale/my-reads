@@ -12,7 +12,13 @@ class LibraryContainer extends React.Component {
     books: {}
   }
 
-  handleShelfChange = (book, shelf) => {
+  constructor(props) {
+    super(props);
+
+    this.handleShelfChange = this.handleShelfChange.bind(this);
+  }
+
+  handleShelfChange(book, shelf) {
     const oldShelf = book.shelf;
 
     // Optimistic update
@@ -24,7 +30,7 @@ class LibraryContainer extends React.Component {
 
   updateBookShelf(book, shelf) {
     this.setState(
-      ({books}) => ({ ...books, [book.id]: {...book, shelf} }),
+      ({books}) => ({ books: {...books, [book.id]: {...book, shelf} }}),
       () => {
         localStorage.myreads = JSON.stringify(this.state.books);
       }
