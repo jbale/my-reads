@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
   }
 
   state = {
-    query: []
+    query: ''
   }
 
   handleSearchDebounced;
