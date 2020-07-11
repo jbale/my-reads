@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 import Book from './Book';
 
-const BookGrid = ({books, renderBookAction}) => {
+/**
+ * Functional component to display a list of books in a grid sorted by published date
+ *
+ * It accepts a render prop to render an action for each book this provides a way for
+ * consumers of this component to specifiy the action they wish to display alongside
+ * the Book
+ */
+const BookGrid = ({books = [], renderBookAction}) => {
   return (
     <ol className="books-grid">
       {

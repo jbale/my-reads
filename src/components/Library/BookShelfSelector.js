@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Functional component that provides a simple select control and outputs
+ * any changes via the onSelect prop.
+*/
 const BookShelfSelector = ({shelves, onSelect, book}) => {
 
   const handleSelect = (event) => {

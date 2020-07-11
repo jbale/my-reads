@@ -6,6 +6,9 @@ import BookShelfSelector from '../Library/BookShelfSelector';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
+/**
+ * Functional component that combines a SearchBar and BookGrid to display a search page
+ */
 const Search = ({books, shelves, onShelfChange, onSearch}) => {
   return (
     <div className="search-books">

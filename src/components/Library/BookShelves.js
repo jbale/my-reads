@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import BookShelf from './BookShelf';
-import BookShelfSelector from './BookShelfSelector';
 
-const BookShelves = ({books, shelves, onShelfChange}) => {
+/**
+ * Functional component to display a list of books grouped by thier shelves
+ */
+const BookShelves = ({books = [], shelves, onShelfChange}) => {
 
+  // Convert from list of book to dict of books by shelf
   const booksByShelf = books
     .filter(({shelf}) => shelf !== null)
     .reduce((acc, book) => ({
@@ -21,8 +24,9 @@ const BookShelves = ({books, shelves, onShelfChange}) => {
         <BookShelf
           key={shelf.id}
           books={booksByShelf[shelf.id]}
+          shelves={shelves}
           shelf={shelf}
-          renderBookShelfSelector={(book) => <BookShelfSelector book={book} shelves={shelves} onSelect={onShelfChange} />}
+          onShelfChange={onShelfChange}
         />
       ))}
     </div>
@@ -34,6 +38,5 @@ BookShelves.propTypes = {
   shelves: PropTypes.arrayOf(PropTypes.object).isRequired,
   onShelfChange: PropTypes.func.isRequired
 }
-
 
 export default BookShelves;

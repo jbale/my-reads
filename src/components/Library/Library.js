@@ -5,6 +5,9 @@ import BookShelves from './BookShelves';
 import LibraryHeader from './LibraryHeader';
 import SearchButton from './SearchButton';
 
+/**
+ * Stateless functional component used to display a users library
+ */
 const Library = ({books, shelves, onShelfChange}) => {
 
   return (

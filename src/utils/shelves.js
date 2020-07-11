@@ -1,3 +1,6 @@
+/**
+ * Place to store the shelves that myReads supports
+ */
 export const shelves = [
   {
     id: 'currentlyReading',

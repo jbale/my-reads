@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Functional component displays title and author props
+*/
 const BookMetaData = ({title, authors = ['Unknown']}) => {
 
   return (

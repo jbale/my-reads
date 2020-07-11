@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Stateless functional component used to display heading for library
+ */
 const LibraryHeader = () => {
 
   return (

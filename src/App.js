@@ -5,6 +5,9 @@ import './App.css';
 
 import LibraryContainer from './containers/LibraryContainer';
 
+/**
+ * MyReads application entry point
+ */
 function App() {
   return (
     <Router>
