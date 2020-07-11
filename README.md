@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created for an assignment for the “Udacity React Nano Degree” which I have been using to re-familiarised myself with the fundamentals of React before the introduction of Hooks.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). For more information on how to run the project see below.
 
 ## Available Scripts
 
