@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Library } from '../components/Library';
 import SearchContainer from './SearchContainer';
+import { standardiseDateString } from '../utils/helpers';
 
 /**
  * Container component that handles the state of the users book shelves.
@@ -88,10 +89,12 @@ class LibraryContainer extends React.Component {
   }
 
   render() {
+    const bookList = Object.values(this.state.books)
+      .sort((b1, b2) => standardiseDateString(b2.publishedDate) - standardiseDateString(b1.publishedDate))
     return (
       <Switch>
         <Route exact path="/">
-          <Library books={Object.values(this.state.books)} shelves={shelves} onShelfChange={this.handleShelfChange} />
+          <Library books={bookList} shelves={shelves} onShelfChange={this.handleShelfChange} />
         </Route>
         <Route exact path="/search">
           <SearchContainer libraryBooks={this.state.books} onShelfChange={this.handleShelfChange} />
