@@ -29,3 +29,19 @@ it('renders "Unknown" when authors is empty ([])', () => {
   const unknownElement = getByText(/Unknown/i);
   expect(unknownElement).toBeInTheDocument();
 });
+
+it('renders authors when there is one author', () => {
+  const title = 'book title';
+  const { getByText } = render(<BookMetaData title={title} authors={['author']} />);
+  const authorElement = getByText(/author/i);
+  expect(authorElement).toBeInTheDocument();
+});
+
+it('renders multiple authors', () => {
+  const title = 'book title';
+  const { getByText } = render(<BookMetaData title={title} authors={['authorOne', 'authorTwo']} />);
+  const authorOneElement = getByText(/authorOne/i);
+  const authorTwoElement = getByText(/authorTwo/i);
+  expect(authorOneElement).toBeInTheDocument();
+  expect(authorTwoElement).toBeInTheDocument();
+});
