@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 */
 const BookMetaData = ({title, authors = ['Unknown']}) => {
 
+  const authorsDisplay = authors && authors.length ? authors.join(', ') : 'Unknown';
+
   return (
     <React.Fragment>
       <div className="book-title">{title}</div>
-      <div className="book-authors">{authors.join(', ')}</div>
+      <div className="book-authors">{authorsDisplay}</div>
     </React.Fragment>
   );
 };
