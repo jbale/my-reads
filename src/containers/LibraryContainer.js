@@ -84,7 +84,7 @@ class LibraryContainer extends React.Component {
     }), {});
 
     localStorage.myreads = JSON.stringify(bookById);
-    this.setState(bookById);
+    this.setState({books: bookById});
   }
 
   render() {
